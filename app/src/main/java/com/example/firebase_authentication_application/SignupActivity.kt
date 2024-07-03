@@ -21,7 +21,7 @@ class SignupActivity : AppCompatActivity() {
             getData()
         }
         binding.signinActivity.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
         binding.googleSignUp.setOnClickListener {
             Toast.makeText(this, "Google Sign Up", Toast.LENGTH_SHORT).show()
