@@ -117,9 +117,12 @@
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/google_sign_up"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_margin="10dp"
+                    android:focusable="true"
+                    android:foreground="?selectableItemBackground"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
 
@@ -130,10 +133,14 @@
                         android:src="@drawable/google_icon"
                         android:layout_margin="10dp"/>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/facebook_sign_up"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_margin="10dp"
+                    android:focusable="true"
+                    android:foreground="?selectableItemBackground"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
 
@@ -144,10 +151,14 @@
                         android:src="@drawable/facebook_icon"
                         android:layout_margin="10dp"/>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/github_sign_up"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_margin="10dp"
+                    android:focusable="true"
+                    android:foreground="?selectableItemBackground"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
 

@@ -23,6 +23,15 @@ class SignupActivity : AppCompatActivity() {
         binding.signinActivity.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+        binding.googleSignUp.setOnClickListener {
+            Toast.makeText(this, "Google Sign Up", Toast.LENGTH_SHORT).show()
+        }
+        binding.facebookSignUp.setOnClickListener {
+            Toast.makeText(this, "Facebook Sign Up", Toast.LENGTH_SHORT).show()
+        }
+        binding.githubSignUp.setOnClickListener {
+            Toast.makeText(this, "GitHub Sign Up", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun getData() {
