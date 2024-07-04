@@ -68,13 +68,13 @@ class SignupActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT).show()
                 // new activity
-                binding.passwordEditText.text.clear()
-                binding.confirmPasswordEditText.text.clear()
+                binding.passwordEditText.text?.clear()
+                binding.confirmPasswordEditText.text?.clear()
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
-                binding.passwordEditText.text.clear()
-                binding.confirmPasswordEditText.text.clear()
+                binding.passwordEditText.text?.clear()
+                binding.confirmPasswordEditText.text?.clear()
             }
     }
 }

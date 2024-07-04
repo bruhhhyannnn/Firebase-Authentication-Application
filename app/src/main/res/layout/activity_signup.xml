@@ -39,41 +39,72 @@
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/name_edit_text"
-                android:layout_width="300dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Full name"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/address_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Address"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email_address_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="Email Address"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Full name"
-                android:padding="10dp" />
-            <EditText
-                android:id="@+id/address_edit_text"
-                android:layout_width="300dp"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Password"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Address"
-                android:padding="10dp" />
-            <EditText
-                android:id="@+id/email_address_edit_text"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Email address"
-                android:padding="10dp" />
-            <EditText
-                android:id="@+id/password_edit_text"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Password"
-                android:padding="10dp"/>
-            <EditText
-                android:id="@+id/confirm_password_edit_text"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Confirm Password"
-                android:padding="10dp"/>
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/confirm_password_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Confirm Password"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/signup_button"

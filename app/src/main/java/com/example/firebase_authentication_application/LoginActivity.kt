@@ -73,8 +73,8 @@ class LoginActivity : AppCompatActivity() {
             .signInWithEmailAndPassword(emailAddress, password)
             .addOnSuccessListener {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                binding.emailAddressEditText.text.clear()
-                binding.passwordEditText.text.clear()
+                binding.emailAddressEditText.text?.clear()
+                binding.passwordEditText.text?.clear()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
