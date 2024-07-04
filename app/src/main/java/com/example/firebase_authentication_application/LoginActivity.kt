@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (FirebaseAuth.getInstance().currentUser != null) {
+        if (FirebaseAuth.getInstance().currentUser != null && FirebaseAuth.getInstance().currentUser?.isEmailVerified == true) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -63,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
         }
         if (password.length < 6) {
             binding.passwordEditText.error = "Password must be at least 6 characters"
+            return
         }
 
         loginWithFirebase(emailAddress, password)
@@ -72,11 +73,19 @@ class LoginActivity : AppCompatActivity() {
         FirebaseAuth.getInstance()
             .signInWithEmailAndPassword(emailAddress, password)
             .addOnSuccessListener {
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                binding.emailAddressEditText.text?.clear()
-                binding.passwordEditText.text?.clear()
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                val verification = FirebaseAuth.getInstance().currentUser?.isEmailVerified
+                if (verification == true) {
+                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                    binding.emailAddressEditText.text?.clear()
+                    binding.passwordEditText.text?.clear()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(this, "Please verify the link from your Email first!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Wrong Email or Password", Toast.LENGTH_SHORT).show()
             }
     }
 }
