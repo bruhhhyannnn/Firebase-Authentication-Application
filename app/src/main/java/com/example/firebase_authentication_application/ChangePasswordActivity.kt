@@ -2,6 +2,7 @@ package com.example.firebase_authentication_application
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,11 +20,20 @@ class ChangePasswordActivity : AppCompatActivity() {
         setContentView(binding.root)
         enableEdgeToEdge()
 
-
         binding.emailTextView.text = "Email: " + FirebaseAuth.getInstance().currentUser?.email.toString()
 
         binding.changePasswordButton.setOnClickListener {
             getData()
+        }
+    }
+
+    private fun setInProgress(inProgress: Boolean) {
+        if (inProgress) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.changePasswordButton.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.changePasswordButton.visibility = View.VISIBLE
         }
     }
 
@@ -70,6 +80,7 @@ class ChangePasswordActivity : AppCompatActivity() {
         val credential = EmailAuthProvider.getCredential(user?.email!!, currentPassword)
 
         // Re-authenticate the user
+        setInProgress(true)
         user.reauthenticate(credential)
             .addOnSuccessListener {
 
@@ -77,14 +88,17 @@ class ChangePasswordActivity : AppCompatActivity() {
                 user.updatePassword(newPassword)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Password changed successfully", Toast.LENGTH_SHORT).show()
+                        setInProgress(false)
                         logoutUser()
                     }
                     .addOnFailureListener {
                         Toast.makeText(this, it.localizedMessage ?: "Something went wrong", Toast.LENGTH_SHORT).show()
+                        setInProgress(false)
                     }
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Incorrect current password", Toast.LENGTH_SHORT).show()
+                setInProgress(false)
             }
     }
 

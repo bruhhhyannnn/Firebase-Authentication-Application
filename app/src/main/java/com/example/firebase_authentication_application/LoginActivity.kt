@@ -3,7 +3,9 @@ package com.example.firebase_authentication_application
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.firebase_authentication_application.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -16,6 +18,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        enableEdgeToEdge()
 
         binding.loginButton.setOnClickListener {
             getData()
@@ -49,6 +52,16 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun setInProgress(inProgress: Boolean) {
+        if (inProgress) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.loginButton.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.loginButton.visibility = View.VISIBLE
+        }
+    }
+
     private fun getData() {
         val emailAddress = binding.emailAddressEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
@@ -70,6 +83,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginWithFirebase(emailAddress: String, password: String) {
+        setInProgress(true)
         FirebaseAuth.getInstance()
             .signInWithEmailAndPassword(emailAddress, password)
             .addOnSuccessListener {
@@ -78,14 +92,17 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
                     binding.emailAddressEditText.text?.clear()
                     binding.passwordEditText.text?.clear()
+                    setInProgress(false)
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {
                     Toast.makeText(this, "Please verify the link from your Email first!", Toast.LENGTH_SHORT).show()
+                    setInProgress(false)
                 }
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Wrong Email or Password", Toast.LENGTH_SHORT).show()
+                setInProgress(false)
             }
     }
 }

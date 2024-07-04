@@ -3,7 +3,9 @@ package com.example.firebase_authentication_application
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.firebase_authentication_application.databinding.ActivitySignupBinding
@@ -17,6 +19,7 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        enableEdgeToEdge()
 
         binding.signupButton.setOnClickListener {
             getData()
@@ -32,6 +35,16 @@ class SignupActivity : AppCompatActivity() {
         }
         binding.githubSignUp.setOnClickListener {
             Toast.makeText(this, "GitHub Sign Up", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setInProgress(inProgress: Boolean) {
+        if (inProgress) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.signupButton.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.signupButton.visibility = View.VISIBLE
         }
     }
 
@@ -64,6 +77,7 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun createAccountWithFirebase(name: String, address: String, emailAddress: String, password: String) {
+        setInProgress(true)
         FirebaseAuth.getInstance()
             .createUserWithEmailAndPassword(emailAddress, password)
             .addOnSuccessListener {
@@ -79,6 +93,7 @@ class SignupActivity : AppCompatActivity() {
                                 startActivity(Intent(this, LoginActivity::class.java))
                                 binding.passwordEditText.text?.clear()
                                 binding.confirmPasswordEditText.text?.clear()
+                                setInProgress(false)
                                 finish()
                             }
                             .create()
@@ -86,10 +101,12 @@ class SignupActivity : AppCompatActivity() {
                     }
                     ?.addOnFailureListener {
                         Toast.makeText(this, "Verification Email Failed", Toast.LENGTH_SHORT).show()
+                        setInProgress(false)
                     }
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+                setInProgress(false)
                 binding.passwordEditText.text?.clear()
                 binding.confirmPasswordEditText.text?.clear()
             }

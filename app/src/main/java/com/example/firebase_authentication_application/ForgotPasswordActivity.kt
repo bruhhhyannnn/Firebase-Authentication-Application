@@ -3,6 +3,7 @@ package com.example.firebase_authentication_application
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,16 @@ class ForgotPasswordActivity : AppCompatActivity() {
         }
     }
 
+    private fun setInProgress(inProgress: Boolean) {
+        if (inProgress) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.resetButton.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.resetButton.visibility = View.VISIBLE
+        }
+    }
+
     private fun getData() {
         val emailAddress = binding.emailAddressEditText.text.toString()
 
@@ -42,15 +53,18 @@ class ForgotPasswordActivity : AppCompatActivity() {
     }
 
     private fun resetEmailAddressFromFirebase(emailAddress: String) {
+        setInProgress(true)
         FirebaseAuth.getInstance()
             .sendPasswordResetEmail(emailAddress)
             .addOnSuccessListener {
                 Toast.makeText(this, "Check your your email", Toast.LENGTH_SHORT).show()
+                setInProgress(false)
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
             .addOnFailureListener {
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                setInProgress(false)
             }
     }
 
