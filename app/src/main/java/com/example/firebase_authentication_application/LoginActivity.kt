@@ -24,6 +24,9 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, SignupActivity::class.java))
             finish()
         }
+        binding.forgotPassword.setOnClickListener {
+
+        }
         binding.googleSignIn.setOnClickListener {
             Toast.makeText(this, "Google Sign In", Toast.LENGTH_SHORT).show()
             // TODO: implement Google Sign In
@@ -35,6 +38,14 @@ class LoginActivity : AppCompatActivity() {
         binding.githubSignIn.setOnClickListener {
             Toast.makeText(this, "GitHub Sign In", Toast.LENGTH_SHORT).show()
             // TODO: implement GitHub Sign In
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 
