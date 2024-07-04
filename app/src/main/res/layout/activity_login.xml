@@ -55,7 +55,7 @@
                 android:padding="10dp"/>
 
             <Button
-                android:id="@+id/signup_button"
+                android:id="@+id/login_button"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:text="Don't have an account yet? "/>
                 <TextView
-                    android:id="@+id/signin_activity"
+                    android:id="@+id/signup_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sign up"
@@ -109,8 +109,8 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/google_icon"
-                        android:layout_margin="10dp"/>
+                        android:layout_margin="10dp"
+                        android:src="@drawable/google_icon" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
