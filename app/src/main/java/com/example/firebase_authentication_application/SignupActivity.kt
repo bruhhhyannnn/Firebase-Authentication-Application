@@ -67,7 +67,7 @@ class SignupActivity : AppCompatActivity() {
             .createUserWithEmailAndPassword(emailAddress, password)
             .addOnSuccessListener {
                 Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT).show()
-                // new activity
+                startActivity(Intent(this, LoginActivity::class.java))
                 binding.passwordEditText.text?.clear()
                 binding.confirmPasswordEditText.text?.clear()
             }
