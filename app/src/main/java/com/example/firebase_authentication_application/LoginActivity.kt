@@ -24,6 +24,18 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, SignupActivity::class.java))
             finish()
         }
+        binding.googleSignIn.setOnClickListener {
+            Toast.makeText(this, "Google Sign In", Toast.LENGTH_SHORT).show()
+            // TODO: implement Google Sign In
+        }
+        binding.facebookSignIn.setOnClickListener {
+            Toast.makeText(this, "Facebook Sign In", Toast.LENGTH_SHORT).show()
+            // TODO: implement Facebook Sign In
+        }
+        binding.githubSignIn.setOnClickListener {
+            Toast.makeText(this, "GitHub Sign In", Toast.LENGTH_SHORT).show()
+            // TODO: implement GitHub Sign In
+        }
     }
 
     private fun getData() {
