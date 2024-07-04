@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
         binding.forgotPassword.setOnClickListener {
-
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
         binding.googleSignIn.setOnClickListener {
             Toast.makeText(this, "Google Sign In", Toast.LENGTH_SHORT).show()
