@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.firebase_authentication_application.databinding.ActivityForgotPasswordBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -23,6 +24,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
         binding.loginActivity.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+        }
+        binding.helpText.setOnClickListener {
+            createDialog()
         }
     }
 
@@ -48,5 +52,14 @@ class ForgotPasswordActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun createDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Forgot Password")
+            .setMessage("The entered email will be sent to your email address, if you we're able to receive it that means you have created an account using that email address, if none means you have not created an account using that email.")
+            .setPositiveButton("Ok") { _, _ -> }
+            .create()
+            .show()
     }
 }
