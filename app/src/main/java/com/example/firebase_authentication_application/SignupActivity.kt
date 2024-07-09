@@ -82,33 +82,37 @@ class SignupActivity : AppCompatActivity() {
             .createUserWithEmailAndPassword(emailAddress, password)
             .addOnSuccessListener {
                 Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT).show()
-
-                FirebaseAuth.getInstance().currentUser?.sendEmailVerification()
-                    ?.addOnSuccessListener {
-                        AlertDialog.Builder(this)
-                            .setTitle("Email Verification")
-                            .setMessage("Please verify your Email Address in order to log in and use this app.")
-                            .setPositiveButton("Okay!") { _, _ ->
-                                Toast.makeText(this, "Verification Email Sent", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this, LoginActivity::class.java))
-                                binding.passwordEditText.text?.clear()
-                                binding.confirmPasswordEditText.text?.clear()
-                                setInProgress(false)
-                                finish()
-                            }
-                            .create()
-                            .show()
-                    }
-                    ?.addOnFailureListener {
-                        Toast.makeText(this, "Verification Email Failed", Toast.LENGTH_SHORT).show()
-                        setInProgress(false)
-                    }
+                sendEmailVerificationWithFirebase()
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
                 setInProgress(false)
                 binding.passwordEditText.text?.clear()
                 binding.confirmPasswordEditText.text?.clear()
+            }
+    }
+
+    private fun sendEmailVerificationWithFirebase() {
+        FirebaseAuth.getInstance().currentUser
+            ?.sendEmailVerification()
+            ?.addOnSuccessListener {
+                AlertDialog.Builder(this)
+                    .setTitle("Email Verification")
+                    .setMessage("Please verify your Email Address in order to log in and use this app.")
+                    .setPositiveButton("Okay!") { _, _ ->
+                        Toast.makeText(this, "Verification Email Sent", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, LoginActivity::class.java))
+                        binding.passwordEditText.text?.clear()
+                        binding.confirmPasswordEditText.text?.clear()
+                        setInProgress(false)
+                        finish()
+                    }
+                    .create()
+                    .show()
+            }
+            ?.addOnFailureListener {
+                Toast.makeText(this, "Verification Email Failed", Toast.LENGTH_SHORT).show()
+                setInProgress(false)
             }
     }
 }
