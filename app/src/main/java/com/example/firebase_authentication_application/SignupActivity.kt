@@ -85,7 +85,7 @@ class SignupActivity : AppCompatActivity() {
                 sendEmailVerificationWithFirebase()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 setInProgress(false)
                 binding.passwordEditText.text?.clear()
                 binding.confirmPasswordEditText.text?.clear()
@@ -93,9 +93,9 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun sendEmailVerificationWithFirebase() {
-        FirebaseAuth.getInstance().currentUser
-            ?.sendEmailVerification()
-            ?.addOnSuccessListener {
+        FirebaseAuth.getInstance().currentUser!!
+            .sendEmailVerification()
+            .addOnSuccessListener {
                 AlertDialog.Builder(this)
                     .setTitle("Email Verification")
                     .setMessage("Please verify your Email Address in order to log in and use this app.")
@@ -110,7 +110,7 @@ class SignupActivity : AppCompatActivity() {
                     .create()
                     .show()
             }
-            ?.addOnFailureListener {
+            .addOnFailureListener {
                 Toast.makeText(this, "Verification Email Failed", Toast.LENGTH_SHORT).show()
                 setInProgress(false)
             }
